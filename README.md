@@ -1,4 +1,6 @@
-# Library for Fixing Issues with Text Contrast
+# Text Contrast
+
+Automatically adjust text color based on background color to improve readability. Also provides methods for determining if an rgb, rgba, or hex color code is light or dark.
 
 ## Basic Example
 
@@ -6,9 +8,10 @@
 <style>
     .bg {
         display: inline-block;
-        float: left;
+        float:   left;
         padding: 25px;
-        border: 1px solid black;
+        border:  1px solid black;
+        color:   black;
     }
 
     .bg-green  { background-color: green;  }
@@ -32,9 +35,19 @@
 
 <script>
     'use strict';
-    
-    // Clean up the contrast of all ".bg" elements
-    textContrast.fix('.bg');
+
+    (() => {
+
+        // Clean up the contrast of all ".bg" elements
+        const light = '#EFEFEF',
+              dark  = '#232323';
+
+        textContrast.fix('.bg', light, dark);
+
+        // If light/dark colors are omitted, 'white' and 'black' are used
+        // textContrast.fix('.bg');
+
+    })();
 </script>
 
 ```
