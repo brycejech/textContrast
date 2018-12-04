@@ -2,6 +2,8 @@
 
 const textContrast = (function() {
 
+    // Recursively consume el
+    // Can be an element, array of elements, selector or array of selectors
     function fix(el, light='white', dark='black'){
 
         // Spread in case working with NodeList, etc on IE
@@ -27,18 +29,21 @@ const textContrast = (function() {
     function isDark(color){
         const light = isLight(color);
 
+        // if light is undefined, failed to make sense of 'color'
         return light === undefined ? undefined : !light;
     }
 
     function isLightOrDark(color){ return isLight(color) ? 'light' : 'dark' }
 
     function _fixContrast(el, light, dark){
+        // TODO: Add support for checking parent elements if bg is fully transparent
 
         const color = _getBgColor(el);
 
         el.style['color'] = isLight(color) ? dark : light;
     }
 
+    // Array.isArray can be used?
     function _isArray(o) { return /\[object Array\]/.test(Object.prototype.toString.call(o)) }
 
     function _isArrayLike(o){
@@ -109,7 +114,7 @@ const textContrast = (function() {
             return undefined;
         }
 
-        const r = match[1], g = match[2], b = match[3];
+        const [_, r, g, b] = match;
 
         return [r, g, b];
     }
@@ -119,7 +124,6 @@ const textContrast = (function() {
 
         if(/^#?([0-9a-fA-F]{3}){1,2}$/.test(str)) return 'hex';
         if(/RGB/.test(str)) return 'rgb';
-
 
         // Incorrectly matches #0000 or #00000
         // /^#?([0-9a-fA-F]{3}){1,2}$/
