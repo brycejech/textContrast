@@ -17,12 +17,18 @@ const textContrast = (function() {
     function isLight(color){
         const rgbArray = _toRGBArray(color);
 
+        if(!rgbArray) return;
+
         const yiq = _getContrastYIQ(rgbArray);
 
         return (yiq >= 128) ? true : false;
     }
 
-    function isDark(color){ return !isLight(color) }
+    function isDark(color){
+        const light = isLight(color);
+
+        return light === undefined ? undefined : !light;
+    }
 
     function isLightOrDark(color){ return isLight(color) ? 'light' : 'dark' }
 
@@ -68,6 +74,9 @@ const textContrast = (function() {
                 case 'rgb':
                     parts = _parseRGBComponents(color);
                     break;
+                default:
+                    console.error(`Failed to determine color type for "${ color }"`);
+                    return;
             }
             r = parts[0];
             g = parts[1];
@@ -106,13 +115,14 @@ const textContrast = (function() {
     }
 
     function _isHexOrRGB(str){
-        str = str.toUpperCase();
+        str = str.trim().toUpperCase();
 
-        if(/#/.test(str))   return 'hex';
+        if(/^#?([0-9a-fA-F]{3}){1,2}$/.test(str)) return 'hex';
         if(/RGB/.test(str)) return 'rgb';
 
-        // Hex colors without leading octothorpe
-        if(/[0-9A-F]{6}|[0-9A-F]{3}/.test(str)) return 'hex';
+
+        // Incorrectly matches #0000 or #00000
+        // /^#?([0-9a-fA-F]{3}){1,2}$/
 
         return undefined;
     }
