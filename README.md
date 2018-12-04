@@ -23,7 +23,7 @@ Automatically adjust text color based on background color to improve readability
     .bg-white  { background-color: white;  }
 </style>
 
-<script src="/js/textContrast.js"></script>
+<script src="/js/text-contrast.min.js"></script>
 
 <div class="bg bg-green">Some Text</div>
 <div class="bg bg-yellow">Some Text</div>
