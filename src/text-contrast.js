@@ -163,3 +163,5 @@ const textContrast = (function() {
     }
 
 }());
+
+if(module && module.exports) module.exports = textContrast;
