@@ -1,0 +1,32 @@
+{
+  "name": "text-contrast",
+  "version": "1.0.0",
+  "description": "JavaScript Library for Setting Text Color According to Background-Color",
+  "main": "dist/text-contrast.min.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/brycejech/textContrast.git"
+  },
+  "keywords": [
+    "color",
+    "contrast",
+    "hex",
+    "rgb",
+    "rgba",
+    "background-color",
+    "text-color",
+    "color-contrast"
+  ],
+  "author": "Bryce Jech",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/brycejech/textContrast/issues"
+  },
+  "homepage": "https://github.com/brycejech/textContrast#readme",
+  "devDependencies": {
+    "jest": "^23.6.0"
+  }
+}
