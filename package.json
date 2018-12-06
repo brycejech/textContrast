@@ -4,7 +4,11 @@
   "description": "JavaScript Library for Setting Text Color According to Background-Color",
   "main": "dist/text-contrast.min.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest --verbose",
+    "build": "webpack",
+    "build/dev": "npm run build -- --mode development",
+    "build/prod": "npm run build -- --mode production",
+    "watch": "npm run build/dev -- --watch"
   },
   "repository": {
     "type": "git",
@@ -27,6 +31,12 @@
   },
   "homepage": "https://github.com/brycejech/textContrast#readme",
   "devDependencies": {
-    "jest": "^23.6.0"
+    "@babel/core": "^7.2.0",
+    "@babel/preset-env": "^7.2.0",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-loader": "^8.0.4",
+    "jest": "^23.6.0",
+    "webpack": "^4.27.1",
+    "webpack-cli": "^3.1.2"
   }
 }
