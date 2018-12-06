@@ -4,7 +4,7 @@
   "description": "JavaScript Library for Setting Text Color According to Background-Color",
   "main": "dist/text-contrast.min.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --verbose",
     "build": "webpack",
     "build/dev": "npm run build -- --mode development",
     "build/prod": "npm run build -- --mode production",
