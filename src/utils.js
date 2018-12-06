@@ -55,7 +55,7 @@ export function _toRGBArray(color){
                 parts = _parseRGBComponents(color);
                 break;
             default:
-                console.error(`Failed to determine color type for "${ color }"`);
+                throw new Error(`Unknown color type - ${ color }`);
                 return;
         }
         r = parts[0];
@@ -66,6 +66,9 @@ export function _toRGBArray(color){
         r = color[0];
         g = color[1];
         b = color[2];
+    }
+    else{
+        throw new Error(`Unknown color type - ${ color }`);
     }
 
     // Cannot simply test for truthiness as "0" is acceptable
@@ -91,11 +94,15 @@ export function _parseRGBComponents(rgbString){
 
     const [_, r, g, b] = match;
 
-    return [r, g, b];
+    // Use wrapper fn here b/c parseInt also accepts a radix arg
+    // and map will pass a second index arg resulting in invalid radix
+    return [r, g, b].map(num => parseInt(num));
 }
 
 export function _isHexOrRGB(str){
-    str = str.trim().toUpperCase();
+    if(!str) return;
+
+    str = str.toString().trim().toUpperCase();
 
     if(/^#?([0-9a-fA-F]{3}){1,2}$/.test(str)) return 'hex';
     if(/RGB/.test(str)) return 'rgb';
@@ -107,6 +114,8 @@ export function _isHexOrRGB(str){
 }
 
 export function _hexToRGB(str){
+    if(typeof str !== 'string'){ throw new Error('Invalid hex code') }
+    
     let hex = str.replace('#', '').toUpperCase();
 
     if(!(hex.length % 3 === 0)){ throw new Error('Invalid hex code') }
