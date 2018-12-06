@@ -1,6 +1,8 @@
 'use strict';
 
-const tc = require('./text-contrast');
+import { textContrast } from './text-contrast';
+
+const tc = textContrast;
 
 const lightColors = [
     '#ffffff',

@@ -155,13 +155,19 @@ const textContrast = (function() {
     }
 
     // Public API
-    return {
+    const publicAPI = {
         fix,
         isLight,
         isDark,
         isLightOrDark
     }
 
+    if(window){
+        window.textContrast = publicAPI;
+    }
+
+    return publicAPI;
+
 }());
 
-if(module && module.exports) module.exports = textContrast;
+export { textContrast };
