@@ -9,9 +9,11 @@ module.exports = {
         filename: 'text-contrast.min.js',
         // Will wrap in 'textContrast' namespace
         // Omit since we're returning a namespaced object already
-        // library:  'textContrast',
+        library:  'textContrast',
         libraryTarget: 'umd',
-        umdNamedDefine: true
+        umdNamedDefine: true,
+        // https://github.com/webpack/webpack/issues/6784
+        globalObject: 'typeof self !== \'undefined\' ? self : this'
     },
     module: {
 		rules: [
